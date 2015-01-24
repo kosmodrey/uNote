@@ -1,0 +1,37 @@
+{
+  "name": "unote",
+  "title": "μNote",
+  "version": "0.1",
+  "id": "unote@kosmodrey",
+  "description": "Minimalistic notes. For every site.",
+  "author": "Kosmodrey",
+  "homepage": "https://github.com/kosmodrey/uNote",
+  "license": "VUL 0",
+  "icon": "./data/icon.png",
+  "preferences": [
+    {
+      "name": "panelWidth",
+      "title": "Note width",
+      "type": "integer",
+      "value": 350
+    },
+    {
+      "name": "panelHeight",
+      "title": "Note height",
+      "type": "integer",
+      "value": 400
+    },
+    {
+      "name": "panelOnCopy",
+      "title": "Show note on copy",
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "separator",
+      "title": "Seperator",
+      "type": "string",
+      "value": "---"
+    }
+  ]
+}
