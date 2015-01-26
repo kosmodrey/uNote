@@ -32,6 +32,12 @@
       "title": "Seperator",
       "type": "string",
       "value": "---"
+    },
+    {
+      "name": "sync",
+      "title": "Synchronization",
+      "type": "bool",
+      "value": true
     }
   ]
 }
