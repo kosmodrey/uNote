@@ -34,6 +34,12 @@
       "value": "---"
     },
     {
+      "name": "combo",
+      "title": "Hotkey",
+      "type": "string",
+      "value": "accel-x"
+    },
+    {
       "name": "sync",
       "title": "Synchronization",
       "type": "bool",
