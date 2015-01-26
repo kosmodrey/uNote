@@ -37,7 +37,7 @@
       "name": "combo",
       "title": "Hotkey",
       "type": "string",
-      "value": "accel-x"
+      "value": "accel-m"
     },
     {
       "name": "sync",
