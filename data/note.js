@@ -14,3 +14,8 @@ self.port.on('init', (text) => {
   note.scrollTop = 0;
   note.focus();
 });
+
+self.port.on('start', (ph) => {
+  // Set placeholder
+  note.placeholder = ph;
+});
