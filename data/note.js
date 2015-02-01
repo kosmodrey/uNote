@@ -15,7 +15,19 @@ self.port.on('init', (text) => {
   note.focus();
 });
 
-self.port.on('start', (ph) => {
-  // Set placeholder
-  note.placeholder = ph;
+self.port.on('cmd', (name, data) => {
+  switch (name) {
+    case 'textStyle':
+      // Set text style
+      note.style.font = data;
+      break;
+    case 'textColor':
+      // Set text color
+      note.style.color = data;
+      break;
+    case 'placeholder':
+      // Set placeholder
+      note.placeholder = data;
+      break;
+  }
 });

@@ -28,6 +28,18 @@
       "value": true
     },
     {
+      "name": "textStyle",
+      "title": "Text Style",
+      "type": "string",
+      "value": "10pt 'Lucida Sans Unicode', 'Lucida Grande', sans-serif"
+    },
+    {
+      "name": "textColor",
+      "title": "Text Color",
+      "type": "string",
+      "value": "#000000"
+    },
+    {
       "name": "separator",
       "title": "Separator",
       "type": "string",
