@@ -28,6 +28,38 @@
       "value": true
     },
     {
+      "name": "panelPosition",
+      "title": "Note position",
+      "type": "menulist",
+      "value": "button",
+      "options": [
+        {
+          "value": "button",
+          "label": "Attach to Button"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "top-left",
+          "label": "Top Left"
+        },
+        {
+          "value": "top-right",
+          "label": "Top Right"
+        },
+        {
+          "value": "bottom-left",
+          "label": "Bottom Left"
+        },
+        {
+          "value": "bottom-right",
+          "label": "Bottom Right"
+        }
+      ]
+    },
+    {
       "name": "textStyle",
       "title": "Text Style",
       "type": "string",
