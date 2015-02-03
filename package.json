@@ -28,6 +28,12 @@
       "value": true
     },
     {
+      "name": "panelOnInit",
+      "title": "Auto-open pinned notes",
+      "type": "bool",
+      "value": true
+    },
+    {
       "name": "panelPosition",
       "title": "Note position",
       "type": "menulist",
