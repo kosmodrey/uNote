@@ -7,7 +7,7 @@
   "author": "Kosmodrey",
   "homepage": "https://github.com/kosmodrey/uNote",
   "license": "VUL 0",
-  "icon": "./data/icon.png",
+  "icon": "./data/icons/icon.png",
   "preferences": [
     {
       "name": "panelWidth",

@@ -1,9 +1,7 @@
 'use strict';
 
-// Storage
-let store = {};
 // Find DOM elements
-let note = document.getElementById('notes');
+const note = document.getElementById('notes');
 
 // On double click
 note.addEventListener('dblclick', () => {
@@ -12,18 +10,18 @@ note.addEventListener('dblclick', () => {
 
 // Register and send key data
 note.addEventListener('keyup', () => {
-  self.port.emit('typed-text', note.value);
+  self.port.emit('cmd', 'typing', note.value);
 });
 
-// Listen events
-self.port.on('init', (text) => {
-  note.value = text || '';
-  note.scrollTop = 0;
-  note.focus();
-});
-
+// Commands
 self.port.on('cmd', (name, data) => {
   switch (name) {
+    case 'notes':
+      // Set notes
+      note.value = data || '';
+      note.scrollTop = 0;
+      note.focus();
+      break;
     case 'textStyle':
       // Set text style
       note.style.font = data;
@@ -35,10 +33,6 @@ self.port.on('cmd', (name, data) => {
     case 'placeholder':
       // Set placeholder
       note.placeholder = data;
-      break;
-    case 'state':
-      // Set state
-      store.state = data;
       break;
   }
 });

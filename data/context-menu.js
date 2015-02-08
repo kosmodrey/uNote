@@ -1,7 +1,7 @@
 'use strict';
 
-// Send selected text on click
+// Send selected text on context menu click
 self.on('click', () => {
-  let text = window.getSelection().toString();
+  const text = window.getSelection().toString();
   self.postMessage(text);
 });
