@@ -1,0 +1,90 @@
+html {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  height: 100%;
+  margin: 0;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  font-size: 10pt;
+}
+
+textarea {
+  padding: 10px;
+  width: 100%;
+  height: calc(100% - 2px);
+  font-family: inherit;
+  font-size: inherit;
+  line-height: 20px;
+  background: inherit;
+  border: 0;
+  box-sizing: border-box;
+  resize: none;
+}
+
+.sidebar {
+  width: 300px;
+  background: #F1F1F1;
+}
+
+.content {
+  flex-grow: 1;
+  background: #ffffff;
+}
+
+#list {
+  padding: 10px;
+  height: 100%;
+  overflow-y: scroll;
+  box-sizing: border-box;
+}
+
+.item {
+  padding: 5px 8px;
+  margin-bottom: 5px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  transition: background 0.2s;
+}
+
+.item:last-child {
+  margin-bottom: 10px;
+}
+
+.item.selected {
+  color: #fff;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.remove {
+  display: none;
+}
+
+.item.selected > .remove {
+  float: right;
+  margin-top: 6px;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: red;
+  border-radius: 50%;
+}
+
+.pin {
+  display: none;
+}
+
+.item.selected > .pin {
+  float: right;
+  margin: 6px 5px 0 0;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: gray;
+  border-radius: 50%;
+}
+
+.item.pinned > .pin {
+  background: gold;
+}

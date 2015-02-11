@@ -90,6 +90,12 @@
       "value": "accel-m"
     },
     {
+      "name": "openManager",
+      "title": "Notes Manager",
+      "type": "control",
+      "label": "Open Manager"
+    },
+    {
       "name": "sync",
       "title": "Synchronization",
       "type": "bool",
