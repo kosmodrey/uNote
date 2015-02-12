@@ -4,9 +4,10 @@ const list = document.getElementById('list');
 const notes = document.getElementById('notes');
 
 let lastItem;
+let lang = {};
 
-// Get list
-self.port.emit('cmd', 'list');
+// Send startup command
+self.port.emit('cmd', 'startup');
 
 // On item clicked
 list.addEventListener('click', function(evt) {
@@ -45,6 +46,9 @@ notes.addEventListener('keyup', () => {
 // Recive Commands
 self.port.on('cmd', (name, data) => {
   switch (name) {
+    case 'lang':
+      lang = data;
+    break;
     case 'get':
       setNotes(data);
     break;
@@ -59,8 +63,8 @@ function setList(data) {
   let html = '';
   for (let item in data) {
     html += `
-      <div class="item${ data[item].state ? ' pinned' : ''}" data-host="${item}">
-        ${item}
+      <div class="item${data[item].state ? ' pinned' : ''}" data-host="${item}">
+        ${item == '__null__' ? lang.blankPage : item}
         <span class="remove"></span>
         <span class="pin"></span>
       </div>
