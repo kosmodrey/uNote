@@ -65,8 +65,8 @@ function setList(data) {
     html += `
       <div class="item${data[item].state ? ' pinned' : ''}" data-host="${item}">
         ${item == '__null__' ? lang.blankPage : item}
-        <span class="remove"></span>
-        <span class="pin"></span>
+        <span class="remove" title="${lang.removeNote}"></span>
+        <span class="pin" title="${lang.pinNote}"></span>
       </div>
     `;
   }
