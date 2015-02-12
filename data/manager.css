@@ -30,13 +30,13 @@ textarea {
 
 .content {
   flex-grow: 1;
-  background: #ffffff;
+  background: #fff;
 }
 
 #list {
   padding: 10px;
   height: 100%;
-  overflow-y: scroll;
+  overflow-y: auto;
   box-sizing: border-box;
 }
 
@@ -46,6 +46,8 @@ textarea {
   background: rgba(0, 0, 0, 0.1);
   border-radius: 2px;
   transition: background 0.2s;
+  -moz-user-select: none;
+  cursor: default;
 }
 
 .item:last-child {
@@ -57,8 +59,9 @@ textarea {
   background: rgba(0, 0, 0, 0.8);
 }
 
-.remove {
+.pin, .remove {
   display: none;
+  cursor: pointer;
 }
 
 .item.selected > .remove {
@@ -67,12 +70,8 @@ textarea {
   display: inline-block;
   width: 10px;
   height: 10px;
-  background: red;
+  background: #F92672;
   border-radius: 50%;
-}
-
-.pin {
-  display: none;
 }
 
 .item.selected > .pin {
@@ -81,8 +80,16 @@ textarea {
   display: inline-block;
   width: 10px;
   height: 10px;
-  background: gray;
+  background: #EBEBEB;
   border-radius: 50%;
+}
+
+.item.selected > .pin:hover {
+  background: #FCAA31;
+}
+
+.item.selected > .remove:hover {
+  background: #FA3535;
 }
 
 .item.pinned > .pin {
