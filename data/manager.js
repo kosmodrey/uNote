@@ -18,6 +18,7 @@ list.addEventListener('click', function(evt) {
     if (lastItem) lastItem.classList.remove('selected');
     lastItem = item;
     item.classList.add('selected');
+    notes.disabled = false;
     self.port.emit('cmd', 'get', item.dataset.host);
   // Pin button
   } else if (item.classList.contains('pin')) {
@@ -31,6 +32,7 @@ list.addEventListener('click', function(evt) {
   } else if (item.classList.contains('remove')) {
     list.removeChild(item.parentNode);
     notes.value = '';
+    notes.disabled = true;
     self.port.emit('cmd', 'remove', item.parentNode.dataset.host);
   }
 });
