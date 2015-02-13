@@ -21,18 +21,18 @@ self.port.on('cmd', (name, data) => {
       note.value = data || '';
       note.scrollTop = 0;
       note.focus();
-      break;
+    break;
     case 'textStyle':
       // Set text style
       note.style.font = data;
-      break;
+    break;
     case 'textColor':
       // Set text color
       note.style.color = data;
-      break;
+    break;
     case 'placeholder':
       // Set placeholder
       note.placeholder = data;
-      break;
+    break;
   }
 });
