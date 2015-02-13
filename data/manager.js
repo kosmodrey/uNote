@@ -6,6 +6,10 @@ const notes = document.getElementById('notes');
 let lastItem;
 let lang = {};
 
+// Disable and clean textarea
+notes.disabled = true;
+notes.value = '';
+
 // Send startup command
 self.port.emit('cmd', 'startup');
 
