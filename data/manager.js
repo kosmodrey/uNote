@@ -37,6 +37,9 @@ list.addEventListener('click', function(evt) {
     list.removeChild(item.parentNode);
     notes.value = '';
     notes.disabled = true;
+    // Clean list
+    if (list.querySelector('div') === null) list.innerHTML = '';
+    // Send remove command
     self.port.emit('cmd', 'remove', item.parentNode.dataset.host);
   }
 });
@@ -54,6 +57,8 @@ self.port.on('cmd', (name, data) => {
   switch (name) {
     case 'lang':
       lang = data;
+      // Set localization labels
+      list.dataset.label = lang.noNotesLabel;
     break;
     case 'get':
       setNotes(data);
