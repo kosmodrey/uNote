@@ -44,9 +44,14 @@ self.port.on('cmd', (name, data) => {
       note.style.color = data;
     break;
     case 'isGlobal':
-      toggleGlobal.checked = data;
+      toggleGlobal.checked = data.value;
       // Set placeholder
-      note.placeholder = toggleGlobal.checked ? loc.noGlobalNotes : loc.noNotes;
+      if (data.host == '__null__' || toggleGlobal.checked) {
+        data = loc.noGlobalNotes;
+      } else {
+        data = loc.noNotes
+      }
+      note.placeholder = data;
     break;
   }
 });
