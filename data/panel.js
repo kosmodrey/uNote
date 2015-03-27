@@ -4,6 +4,9 @@
 const note = document.getElementById('notes');
 const toggleGlobal = document.getElementById('toggle-global');
 
+// Store localization
+let loc = {};
+
 // On double click
 note.addEventListener('dblclick', () => {
   self.port.emit('cmd', 'state');
@@ -22,6 +25,10 @@ toggleGlobal.onchange = () => {
 // Commands
 self.port.on('cmd', (name, data) => {
   switch (name) {
+    case 'localization':
+      // Set localization strings
+      loc = data;
+    break;
     case 'notes':
       // Set notes
       note.value = data || '';
@@ -36,12 +43,10 @@ self.port.on('cmd', (name, data) => {
       // Set text color
       note.style.color = data;
     break;
-    case 'placeholder':
-      // Set placeholder
-      note.placeholder = data;
-    break;
     case 'isGlobal':
       toggleGlobal.checked = data;
+      // Set placeholder
+      note.placeholder = toggleGlobal.checked ? loc.noGlobalNotes : loc.noNotes;
     break;
   }
 });
