@@ -75,7 +75,7 @@ function setList(data) {
   for (let item in data) {
     html += `
       <div class="item${data[item].state ? ' pinned' : ''}" data-host="${item}">
-        ${item == '__null__' ? lang.blankPage : item}
+        ${item == '__null__' ? lang.globalNotes : item}
         <span class="remove" title="${lang.removeNote}"></span>
         <span class="pin" title="${lang.pinNote}"></span>
       </div>
