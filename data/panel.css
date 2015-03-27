@@ -1,8 +1,17 @@
+@font-face {
+  font-family: 'Icons';
+  src: url('./icons/icons.woff?0');
+  font-weight: normal;
+  font-style: normal;
+}
+
 html {
   height: 100%;
 }
 
 body {
+  display: flex;
+  flex-direction: column;
   margin: 0;
   height: 100%;
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
@@ -10,9 +19,9 @@ body {
 }
 
 textarea {
-  padding: 10px;
+  padding: 5px;
   width: 100%;
-  height: calc(100% - 2px);
+  height: 100%;
   font-family: inherit;
   font-size: inherit;
   line-height: 20px;
@@ -20,4 +29,27 @@ textarea {
   border: 0;
   box-sizing: border-box;
   resize: none;
+}
+
+.switch {
+  display: flex;
+  align-self: center;
+  margin-bottom: 5px;
+  font-family: 'Icons';
+  font-size: 1.8em;
+  -moz-user-select: none;
+}
+
+#toggle-global {
+  display: none;
+}
+
+#toggle-global + label {
+  cursor: pointer;
+  color: #c0c0c0;
+  transition: all 0.2s;
+}
+
+#toggle-global:checked + label {
+  color: #366CC5;
 }

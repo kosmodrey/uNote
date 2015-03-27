@@ -2,6 +2,7 @@
 
 // Find DOM elements
 const note = document.getElementById('notes');
+const toggleGlobal = document.getElementById('toggle-global');
 
 // On double click
 note.addEventListener('dblclick', () => {
@@ -12,6 +13,11 @@ note.addEventListener('dblclick', () => {
 note.addEventListener('keyup', () => {
   self.port.emit('cmd', 'typing', note.value);
 });
+
+// Toggle global switch
+toggleGlobal.onchange = () => {
+  self.port.emit('cmd', 'toggle-global', toggleGlobal.checked);
+};
 
 // Commands
 self.port.on('cmd', (name, data) => {
@@ -33,6 +39,9 @@ self.port.on('cmd', (name, data) => {
     case 'placeholder':
       // Set placeholder
       note.placeholder = data;
+    break;
+    case 'isGlobal':
+      toggleGlobal.checked = data;
     break;
   }
 });
