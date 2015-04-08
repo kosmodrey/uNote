@@ -37,6 +37,7 @@ textarea {
   padding: 10px;
   height: 100%;
   overflow-y: auto;
+  list-style: none;
   box-sizing: border-box;
 }
 

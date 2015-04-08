@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'Icons';
-  src: url('../icons/icons.woff?0');
+  src: url('../../icons/icons.woff?0');
   font-weight: normal;
   font-style: normal;
 }
@@ -50,6 +50,14 @@ textarea {
   transition: all 0.2s;
 }
 
+#toggle-global + label:hover {
+  color: #a8a8a8;
+}
+
 #toggle-global:checked + label {
   color: #366CC5;
+}
+
+#toggle-global:checked + label:hover {
+  color: #25529C;
 }
