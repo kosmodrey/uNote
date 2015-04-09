@@ -41,7 +41,6 @@ self.port.on('cmd', (name, data) => {
     case 'isGlobal':
       toggleGlobal.checked = data.value;
       // Set label
-      console.log('host>', data.host);
       if (data.host == '__null__' || toggleGlobal.checked) {
         data = loc.noGlobalNotes;
       } else {
