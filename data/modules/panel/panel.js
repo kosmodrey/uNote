@@ -13,6 +13,8 @@ const cmd = (name, data) => self.port.emit('cmd', name, data);
 
 // On typing
 notes.onkeyup = x => cmd('typing', notes.value);
+// On double click
+notes.ondblclick = x => cmd('state');
 // Global switch
 toggleGlobal.onchange = x => cmd('toggle-global', toggleGlobal.checked);
 
