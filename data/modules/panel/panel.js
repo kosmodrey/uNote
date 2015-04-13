@@ -2,8 +2,11 @@
 
 // Find DOM elements
 const
+  title = document.getElementById('title'),
   notes = document.getElementById('notes'),
-  toggleGlobal = document.getElementById('toggle-global');
+  manager = document.getElementById('button-manager'),
+  settings = document.getElementById('button-settings'),
+  global = document.getElementById('toggle-global');
 
 // Store localization
 let loc = {};
@@ -13,10 +16,14 @@ const cmd = (name, data) => self.port.emit('cmd', name, data);
 
 // On typing
 notes.onkeyup = x => cmd('typing', notes.value);
+title.onkeyup = x => cmd('typing-title', title.value);
 // On double click
-notes.ondblclick = x => cmd('state');
-// Global switch
-toggleGlobal.onchange = x => cmd('toggle-global', toggleGlobal.checked);
+title.ondblclick = x => cmd('state');
+// Buttons
+manager.onclick = x => cmd('button', 'manager');
+settings.onclick = x => cmd('button', 'settings');
+// Toggles
+global.onchange = x => cmd('toggle-global', global.checked);
 
 // Commands
 self.port.on('cmd', (name, data) => {
@@ -39,16 +46,19 @@ self.port.on('cmd', (name, data) => {
     case 'textColor':
       notes.style.color = data;
     break;
-    // Set global toggle button
-    case 'isGlobal':
-      toggleGlobal.checked = data.value;
-      // Set label
-      if (data.host == '__null__' || toggleGlobal.checked) {
-        data = loc.noGlobalNotes;
+    // Update user interface
+    case 'update':
+      global.checked = data.global;
+      // Set labels
+      if (data.host == '__null__' || global.checked) {
+        notes.placeholder = loc.noGlobalNotes;
+        title.placeholder = loc.globalNotes;
+        title.value = data.item.title || title.placeholder;
       } else {
-        data = loc.noNotes
+        notes.placeholder = loc.noNotes;
+        title.placeholder = data.host;
+        title.value = data.item.title || data.host;
       }
-      notes.placeholder = data;
     break;
   }
 });
