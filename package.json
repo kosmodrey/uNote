@@ -10,28 +10,46 @@
   "icon": "./data/icons/icon.png",
   "preferences": [
     {
+      "name": "openSettings",
+      "title": "Settings",
+      "type": "control",
+      "label": "Open Settings",
+      "hidden": false
+    },
+    {
+      "name": "openManager",
+      "title": "Manager",
+      "type": "control",
+      "label": "Open Manager",
+      "hidden": false
+    },
+    {
       "name": "panelWidth",
       "title": "Note width",
       "type": "integer",
-      "value": 350
+      "value": 350,
+      "hidden": true
     },
     {
       "name": "panelHeight",
       "title": "Note height",
       "type": "integer",
-      "value": 400
+      "value": 400,
+      "hidden": true
     },
     {
       "name": "panelOnCopy",
       "title": "Show note on copy",
       "type": "bool",
-      "value": true
+      "value": true,
+      "hidden": true
     },
     {
       "name": "panelOnInit",
       "title": "Auto-open pinned notes",
       "type": "bool",
-      "value": true
+      "value": true,
+      "hidden": true
     },
     {
       "name": "panelPosition",
@@ -63,49 +81,50 @@
           "value": "bottom-right",
           "label": "Bottom Right"
         }
-      ]
+      ],
+      "hidden": true
     },
     {
       "name": "textStyle",
       "title": "Text Style",
       "type": "string",
-      "value": "10pt 'Lucida Sans Unicode', 'Lucida Grande', sans-serif"
+      "value": "10pt 'Lucida Sans Unicode', 'Lucida Grande', sans-serif",
+      "hidden": true
     },
     {
       "name": "textColor",
       "title": "Text Color",
       "type": "color",
-      "value": "#000000"
+      "value": "#000000",
+      "hidden": true
     },
     {
       "name": "separator",
       "title": "Separator",
       "type": "string",
-      "value": "---"
+      "value": "---",
+      "hidden": true
     },
     {
       "name": "combo",
       "title": "Hotkey",
       "type": "string",
-      "value": "accel-m"
-    },
-    {
-      "name": "openManager",
-      "title": "Notes Manager",
-      "type": "control",
-      "label": "Open Manager"
+      "value": "accel-m",
+      "hidden": true
     },
     {
       "name": "sync",
       "title": "Synchronization",
       "type": "bool",
-      "value": true
+      "value": true,
+      "hidden": true
     },
     {
       "name": "global",
       "title": "Global notes",
       "type": "bool",
-      "value": false
+      "value": false,
+      "hidden": true
     }
   ]
 }
