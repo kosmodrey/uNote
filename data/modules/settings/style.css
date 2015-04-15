@@ -15,12 +15,20 @@ body {
 
 }
 
+a {
+  color: #6B3CFB;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
 header {
   cursor: default;
   -moz-user-select: none;
 }
 
-header > h1 {
+h1 {
   margin: 0;
   padding: 0;
   font-weight: normal;
@@ -58,14 +66,14 @@ li:last-child {
   border-bottom: 0;
 }
 
-li .name {
+li .head {
   flex-grow: 1;
   line-height: 1em;
 }
 
 li .title {
   font-weight: bold;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 li .description {
@@ -74,6 +82,7 @@ li .description {
 }
 
 li .element {
+  display: flex;
   align-self: center;
 }
 
@@ -83,8 +92,22 @@ li .element input {
   -moz-appearance: textfield;
 }
     
+li .element .plus {
+  margin: 0 5px;
+  cursor: default;
+  -moz-user-select: none;
+}
+    
 select {
   padding: 4px;
+  color: #444;
+  background: #f8f8f8;
+  border: 1px solid rgba(8, 8, 8, 0.1);
+  -moz-appearance: none;
+}
+    
+option {
+  background: #fff;
 }
     
 input[type="checkbox"] {
@@ -93,29 +116,22 @@ input[type="checkbox"] {
     
 input[type="checkbox"] + label {
   display: block;
-  width: 24px;
-  height: 24px;
-  background: #f4f4f4;
-  cursor: pointer;
+  width: 22px;
+  height: 22px;
+  background: #f8f8f8;
   border-radius: 50%;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(8, 8, 8, 0.1);
   transition: all 0.1s;
+  cursor: pointer;
 }
     
 input[type="checkbox"]:checked + label {
   background: #5CCA59;
 }
-    
-input[type="color"] {
-  padding: 0px;
-  background: none;
-  cursor: pointer;
-  border: 0;
-}
-    
+
 input[type="number"] {
   padding: 5px;
-  color: #999;
+  color: #888;
   background: #f8f8f8;
   border: 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -125,16 +141,42 @@ input[type="number"]:focus {
   color: #444;
   border-bottom: 1px solid #4285F4;
 }
+ 
+input[type="color"] {
+  padding: 2px 0;
+  width: 60px;
+  height: 30px;
+  background: none;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+    
+.element.font > * {
+  margin-right: 5px;
+}
+    
+.element.font > :last-child {
+  margin-right: 0;
+}
 
-.element:after {
+.element.font .number:after {
+  margin-top: 4px;
+}
+   
+.element.font input[type="number"] {
+  width: 4em;
+}
+
+.number {
+  display: flex;  
+}
+
+.number:after {
   position: absolute;
   margin: 2px -1.6em;
   font-size: 0.8em;
-  color: rgba(0, 0, 0, 0.1);
-}
-    
-.element.number:after {
- content: 'px';
+  color: rgba(0, 0, 0, 0.2);
+  content: 'px';
 }
 
 /* Footer */
@@ -146,6 +188,6 @@ footer {
   text-align: center;
 }
 
-footer > p {
+footer p {
   margin: 0;
 }
