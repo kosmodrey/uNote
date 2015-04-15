@@ -34,7 +34,7 @@
       "name": "panelHeight",
       "title": "Note height",
       "type": "integer",
-      "value": 400,
+      "value": 450,
       "hidden": true
     },
     {
@@ -85,17 +85,24 @@
       "hidden": true
     },
     {
+      "name": "textSize",
+      "title": "Text Size",
+      "type": "string",
+      "value": "13",
+      "hidden": true
+    },
+    {
       "name": "textStyle",
       "title": "Text Style",
       "type": "string",
-      "value": "10pt 'Lucida Sans Unicode', 'Lucida Grande', sans-serif",
+      "value": "'Lucida Sans Unicode', 'Lucida Grande', sans-serif",
       "hidden": true
     },
     {
       "name": "textColor",
       "title": "Text Color",
       "type": "color",
-      "value": "#000000",
+      "value": "#111111",
       "hidden": true
     },
     {
