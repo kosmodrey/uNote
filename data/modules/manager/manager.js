@@ -1,10 +1,12 @@
 'use strict';
 
+// Find DOM elements
 const
   list = document.getElementById('list'),
   notes = document.getElementById('notes');
 
-let lastItem, lang = {};
+// Store last selected item and locatication
+let lastItem, loc = {};
 
 // Cmd command
 const cmd = (name, data) => self.port.emit('cmd', name, data);
@@ -17,7 +19,7 @@ notes.value = '';
 cmd('startup');
 
 // On item clicked
-list.addEventListener('click', function(evt) {
+list.onclick = evt => {
   const item = evt.target;
   if (!item) return;
   // Item
@@ -45,53 +47,40 @@ list.addEventListener('click', function(evt) {
     // Send remove command
     cmd('remove', item.parentNode.dataset.host);
   }
+};
+
+// Send typing text
+notes.onkeyup = x => cmd('typing', {
+  host: lastItem.dataset.host,
+  notes: notes.value
 });
 
-// Send key data
-notes.addEventListener('keyup', () => {
-  cmd('typing', {
-    host: lastItem.dataset.host,
-    notes: notes.value
-  });
-});
-
-// Recive Commands
+// Commands
 self.port.on('cmd', (name, data) => {
   switch (name) {
-    // Set localization labels
-    case 'lang':
-      lang = data;
-      list.dataset.label = lang.noNotesLabel;
+    // Set localization
+    case 'localization':
+      loc = data;
+      list.dataset.label = loc.noNotesLabel;
     break;
     // Set notes
     case 'get':
-      setNotes(data);
+      // if (document.querySelector('.item[data-host="' + data.host + '"]'))
+      notes.value = data.item.notes;
     break;
     // Set list
     case 'list':
-      setList(data);
+      let html = '';
+      for (let item in data) {
+        html += `
+          <li class="item${data[item].state ? ' pinned' : ''}" data-host="${item}">
+            ${item == '__null__' ? loc.globalNotes : (data[item].title || item)}
+            <span class="remove" title="${loc.removeNote}"></span>
+            <span class="pin" title="${loc.pinNote}"></span>
+          </li>
+        `;
+      }
+      list.innerHTML = html;
     break;
   }
 });
-
-// Set list
-function setList(data) {
-  let html = '';
-  for (let item in data) {
-    html += `
-      <li class="item${data[item].state ? ' pinned' : ''}" data-host="${item}">
-        ${item == '__null__' ? lang.globalNotes : item}
-        <span class="remove" title="${lang.removeNote}"></span>
-        <span class="pin" title="${lang.pinNote}"></span>
-      </li>
-    `;
-  }
-  list.innerHTML = html;
-}
-
-// Set notes
-function setNotes(data) {
-  const item = document.querySelector('.item[data-host="' + data.host + '"]');
-  if (!item) return;
-  notes.value = data.item.notes;
-}
