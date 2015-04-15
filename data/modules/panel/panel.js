@@ -38,18 +38,15 @@ self.port.on('cmd', (name, data) => {
       notes.scrollTop = 0;
       notes.focus();
     break;
-    // Set text style
-    case 'textStyle':
-      notes.style.font = data;
-    break;
-    // Set text color
-    case 'textColor':
-      notes.style.color = data;
+    // Set font
+    case 'font':
+      if (data.size) notes.style.fontSize = data.size + 'px';
+      if (data.style) notes.style.fontFamily = data.style; 
+      if (data.color) notes.style.color = data.color;
     break;
     // Update user interface
     case 'update':
       global.checked = data.global;
-      // Set labels
       if (data.host == '__null__' || global.checked) {
         notes.placeholder = loc.noGlobalNotes;
         title.placeholder = loc.globalNotes;
