@@ -5,7 +5,7 @@ const
   list = document.getElementById('list'),
   notes = document.getElementById('notes');
 
-// Store last selected item and locatication
+// Store last selected item and localization
 let lastItem, loc = {};
 
 // Cmd command
@@ -65,22 +65,32 @@ self.port.on('cmd', (name, data) => {
     break;
     // Set notes
     case 'get':
-      // if (document.querySelector('.item[data-host="' + data.host + '"]'))
-      notes.value = data.item.notes;
+      if (document.querySelector('.item[data-host="' + data.host + '"]')) {
+        notes.value = data.item.notes;
+      }
     break;
     // Set list
     case 'list':
-      let html = '';
       for (let item in data) {
-        html += `
-          <li class="item${data[item].state ? ' pinned' : ''}" data-host="${item}">
-            ${item == '__null__' ? loc.globalNotes : (data[item].title || item)}
-            <span class="remove" title="${loc.removeNote}"></span>
-            <span class="pin" title="${loc.pinNote}"></span>
-          </li>
-        `;
+        // Create element
+        const li = document.createElement('li'),
+          span = document.createElement('span'),
+          pin = document.createElement('span'),
+          remove = document.createElement('span');
+        li.className = 'item' + (data[item].state ? ' pinned' : '');
+        li.dataset.host = item;
+        span.textContent =
+          item == '__null__' ? loc.globalNotes : (data[item].title || item);
+        remove.className = 'remove';
+        remove.title = loc.removeNote;
+        pin.className = 'pin';
+        pin.title = loc.pinNote;
+        li.appendChild(span);
+        li.appendChild(remove);
+        li.appendChild(pin);
+        // Append element to list
+        list.appendChild(li);
       }
-      list.innerHTML = html;
     break;
   }
 });
