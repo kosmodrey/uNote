@@ -9,9 +9,7 @@ const fns = [
   ['Alt', 'alt'],
   ['Control', 'control'],
   ['Shift', 'shift'],
-  ['Meta', 'meta'],
-  ['Page Up', 'pageup'],
-  ['Page Down', 'pagedown']
+  ['Meta', 'meta']
 ];
 const fonts = [
   ['Georgia', 'Georgia, serif'],
