@@ -120,7 +120,7 @@ h1 {
 #list:empty:after {
   display: block;
   width: 100%;
-  font-size: 1.4em;
+  font-size: 1.3em;
   color: rgba(255, 255, 255, 0.2);
   text-align: center;
   content: attr(data-label);

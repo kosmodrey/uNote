@@ -74,18 +74,16 @@ self.port.on('cmd', (name, data) => {
       for (let item in data) {
         // Create element
         const li = document.createElement('li'),
-          span = document.createElement('span'),
           pin = document.createElement('span'),
           remove = document.createElement('span');
         li.className = 'item' + (data[item].state ? ' pinned' : '');
         li.dataset.host = item;
-        span.textContent =
+        li.textContent =
           item == '__null__' ? loc.globalNotes : (data[item].title || item);
         remove.className = 'remove';
         remove.title = loc.removeNote;
         pin.className = 'pin';
         pin.title = loc.pinNote;
-        li.appendChild(span);
         li.appendChild(remove);
         li.appendChild(pin);
         // Append element to list
