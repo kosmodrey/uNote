@@ -37,10 +37,15 @@ const models = [
   ['panelOnCopy', 'checkbox'],
   ['panelOnInit', 'checkbox'],
   ['sync', 'checkbox'],
+  ['backup', 'a'],
+  ['restore', 'file']
 ];
 
 // Store DOM elements
-const dom = { font: [], combo: [], checkbox: [], number: [], select: [] };
+const dom = {
+  font: [], combo: [], checkbox: [], number: [],
+  select: [], button: [], file: [], a: []
+};
 
 // Cmd command
 const cmd = (name, data) => self.port.emit('cmd', name, data);
@@ -67,11 +72,17 @@ self.port.on('cmd', (name, data) => {
         prefs['combo-mod1'] = combo[1];
         prefs['combo-key'] = combo[2];
       }
+      // Backup link
+      prefs.backup = 'data:text/json;charset=utf-8,' + prefs.syncNotes;
       // Set values
       for (let name in prefs) {
         const item = document.getElementById(name);
         if (!item) continue;
         const value = prefs[name];
+        if (name == 'backup') {
+          item.href = value;
+          continue;
+        }
         switch (item.type) {
           case 'color':
           case 'number':
@@ -82,6 +93,13 @@ self.port.on('cmd', (name, data) => {
             item.checked = value;
           break;
         }
+      }
+    break;
+    case 'restore':
+      if (data === true) {
+        alert('Backup successfully loaded.');
+      } else {
+        alert('Error loading backup file.');
       }
     break;
   }
@@ -193,7 +211,15 @@ function createDOM() {
         cmd('set', [select.id, value]);
       };
       dom[type].push(select);
-    } else if (type == 'number' || type == 'checkbox') {
+    } else if (name == 'backup') {
+      // Button element
+      const a = document.createElement('a');
+      a.setAttribute('id', name);
+      a.dataset.l10nId = name;
+      a.download = 'uNote-backup-' + Date.now() + '.json';
+      element.appendChild(a);
+      dom[type].push(a);
+    } else {
       // Input element
       const input = document.createElement('input');
       input.type = type;
@@ -205,16 +231,24 @@ function createDOM() {
         element.appendChild(label);
       }
       // Register event
-      input.onchange = e => {
-        let value;
-        if (type == 'checkbox') {
-          value = input.checked;
-        } else {
-          value = parseInt(input.value);
-          if (value != input.value) return;
+      if (type == 'file') {
+        input.onchange = x => {
+          const reader = new FileReader();
+          reader.onload = e => cmd('restore', e.target.result);
+          reader.readAsText(input.files[0]);
         }
-        cmd('set', [input.id, value]);
-      };
+      } else {
+        input.onchange = e => {
+          let value;
+          if (type == 'checkbox') {
+            value = input.checked;
+          } else {
+            value = parseInt(input.value);
+            if (value != input.value) return;
+          }
+          cmd('set', [input.id, value]);
+        };
+      }
       dom[type].push(input);
     }
     li.appendChild(element);
