@@ -190,7 +190,6 @@ function createDOM() {
       // Register event
       select.onchange = x => {
         const value = select.options[select.selectedIndex].value;
-        console.log(type, '>', select.id, value);
         cmd('set', [select.id, value]);
       };
       dom[type].push(select);
@@ -214,7 +213,6 @@ function createDOM() {
           value = parseInt(input.value);
           if (value != input.value) return;
         }
-        console.log(type, '>', input.id, value);
         cmd('set', [input.id, value]);
       };
       dom[type].push(input);
