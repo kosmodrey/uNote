@@ -19,7 +19,7 @@ body {
 }
 
 a {
-  color: #6B3CFB;
+  color: #A791E9;
 }
 
 a:hover {
@@ -66,7 +66,7 @@ h1 {
   position: relative;
   top: -1px;
   margin-bottom: -1px;
-  padding: 5px;
+  padding: 10px;
   width: 100%;
   height: 100%;
   color: #444;

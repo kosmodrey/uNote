@@ -1,5 +1,5 @@
 :root {
-  --listPadding: 0.8em;  
+  --listPadding: 0.8em;
 }
 
 html {
@@ -16,7 +16,7 @@ body {
 }
 
 a {
-  color: #6B3CFB;
+  color: #A791E9;
 }
 
 a:hover {
@@ -91,13 +91,13 @@ li .element input {
   transition: all 0.4s;
   -moz-appearance: textfield;
 }
-    
+
 li .element .plus {
   margin: 0 5px;
   cursor: default;
   -moz-user-select: none;
 }
-    
+
 select {
   padding: 4px;
   color: #444;
@@ -105,15 +105,15 @@ select {
   border: 1px solid rgba(8, 8, 8, 0.1);
   -moz-appearance: none;
 }
-    
+
 option {
   background: #fff;
 }
-    
+
 input[type="checkbox"] {
   display: none;
 }
-    
+
 input[type="checkbox"] + label {
   display: block;
   width: 22px;
@@ -124,7 +124,7 @@ input[type="checkbox"] + label {
   transition: all 0.1s;
   cursor: pointer;
 }
-    
+
 input[type="checkbox"]:checked + label {
   background: #5CCA59;
 }
@@ -136,12 +136,12 @@ input[type="number"] {
   border: 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
- 
+
 input[type="number"]:focus {
   color: #444;
   border-bottom: 1px solid #4285F4;
 }
- 
+
 input[type="color"] {
   padding: 2px 0;
   width: 60px;
@@ -150,7 +150,7 @@ input[type="color"] {
   border: 1px solid rgba(0, 0, 0, 0.1);
   cursor: pointer;
 }
-   
+
 input[type="file"] {
   padding: 4px;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -168,7 +168,7 @@ input[type="file"] {
 .element.font > * {
   margin-right: 5px;
 }
-    
+
 .element.font > :last-child {
   margin-right: 0;
 }
@@ -176,13 +176,13 @@ input[type="file"] {
 .element.font .number:after {
   margin-top: 4px;
 }
-   
+
 .element.font input[type="number"] {
   width: 4em;
 }
 
 .number {
-  display: flex;  
+  display: flex;
 }
 
 .number:after {
