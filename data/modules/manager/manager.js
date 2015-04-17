@@ -33,10 +33,7 @@ list.onclick = evt => {
   } else if (item.classList.contains('pin')) {
     const state = item.parentNode.classList.contains('pinned');
     item.parentNode.classList.toggle('pinned');
-    cmd('setState', {
-      host: item.parentNode.dataset.host,
-      state: !state
-    });
+    cmd('setState', { host: item.parentNode.dataset.host, state: !state });
   // Remove button
   } else if (item.classList.contains('remove')) {
     list.removeChild(item.parentNode);
@@ -62,11 +59,12 @@ self.port.on('cmd', (name, data) => {
     case 'localization':
       loc = data;
       list.dataset.label = loc.noNotesLabel;
+      notes.placeholder = loc.noNotes;
     break;
     // Set notes
     case 'get':
       if (document.querySelector('.item[data-host="' + data.host + '"]')) {
-        notes.value = data.item.notes;
+        notes.value = data.item.notes || '';
       }
     break;
     // Set list

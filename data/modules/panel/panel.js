@@ -6,7 +6,7 @@ const
   notes = document.getElementById('notes'),
   manager = document.getElementById('button-manager'),
   settings = document.getElementById('button-settings'),
-  global = document.getElementById('toggle-global');
+  toggle = document.getElementById('toggle-global');
 
 // Store localization
 let loc = {};
@@ -23,7 +23,7 @@ title.ondblclick = x => cmd('state');
 manager.onclick = x => cmd('button', 'manager');
 settings.onclick = x => cmd('button', 'settings');
 // Toggles
-global.onchange = x => cmd('toggle-global', global.checked);
+toggle.onchange = x => cmd('toggle-global', toggle.checked);
 
 // Commands
 self.port.on('cmd', (name, data) => {
@@ -41,7 +41,7 @@ self.port.on('cmd', (name, data) => {
     // Set font
     case 'font':
       if (data.size) notes.style.fontSize = data.size + 'px';
-      if (data.style) notes.style.fontFamily = data.style; 
+      if (data.style) notes.style.fontFamily = data.style;
       if (data.color) notes.style.color = data.color;
     break;
     // Update user interface
