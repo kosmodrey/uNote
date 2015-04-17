@@ -6,10 +6,10 @@ const list = document.querySelector('section > ul');
 // Data
 const keys = 'abcdefghijklmnopqrstuvwxyz'.split('');
 const fns = [
-  ['Alt', 'alt'],
   ['Control', 'control'],
   ['Shift', 'shift'],
-  ['Meta', 'meta']
+  ['Alt (Option)', 'alt'],
+  ['Meta (Command)', 'meta']
 ];
 const fonts = [
   ['Georgia', 'Georgia, serif'],
