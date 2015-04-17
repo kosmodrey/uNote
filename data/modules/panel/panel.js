@@ -46,8 +46,8 @@ self.port.on('cmd', (name, data) => {
     break;
     // Update user interface
     case 'update':
-      global.checked = data.global;
-      if (data.host == '__null__' || global.checked) {
+      toggle.checked = data.global;
+      if (data.host == '__null__' || toggle.checked) {
         notes.placeholder = loc.noGlobalNotes;
         title.placeholder = loc.globalNotes;
         title.value = data.item.title || title.placeholder;

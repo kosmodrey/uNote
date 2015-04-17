@@ -78,8 +78,7 @@ self.port.on('cmd', (name, data) => {
           remove = document.createElement('span');
         li.className = 'item' + (data[item].state ? ' pinned' : '');
         li.dataset.host = item;
-        li.textContent =
-          item == '__null__' ? loc.globalNotes : (data[item].title || item);
+        li.textContent = data[item].title || (item == '__null__' ? loc.globalNotes : item);
         remove.className = 'remove';
         remove.title = loc.removeNote;
         pin.className = 'pin';
