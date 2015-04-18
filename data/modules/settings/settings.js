@@ -128,15 +128,13 @@ function createDOM() {
     if (type == 'combo') {
       // Hotkey elements
       for (let i = 0; i <= 2; i++) {
-        const select = document.createElement('select');
-        let key;
+        let key, select = document.createElement('select');
         if (i <= 1) {
           select.setAttribute('id', 'combo-mod' + i);
           // Generate function keys
           if (i) fns.unshift(['', '']);
           for (key of fns) {
-            const [name, value] = key;
-            const option = document.createElement('option');
+            let [name, value] = key, option = document.createElement('option');
             option.value = value;
             option.textContent = name;
             select.appendChild(option);
@@ -145,7 +143,7 @@ function createDOM() {
           select.setAttribute('id', 'combo-key');
           // Generate letters
           for (key of keys) {
-            const option = document.createElement('option');
+            let option = document.createElement('option');
             option.value = key;
             option.textContent = key;
             select.appendChild(option);
@@ -153,7 +151,7 @@ function createDOM() {
         }
         // Add 'plus' symbol
         if (i % 3) {
-          const plus = document.createElement('span');
+          let plus = document.createElement('span');
           plus.className = 'plus';
           plus.textContent = '+';
           element.appendChild(plus);
@@ -165,8 +163,8 @@ function createDOM() {
       // Font elements
       for (let i = 0; i <= 2; i++) {
         if (i == 0) {
-          const div = document.createElement('div');
-          const input = document.createElement('input');
+          let div = document.createElement('div'),
+            input = document.createElement('input');
           div.className = 'number';
           input.type = 'number';
           input.setAttribute('id', 'textSize');
@@ -174,10 +172,10 @@ function createDOM() {
           element.appendChild(div);
           dom[type].push(input);
         } else if (i == 1) {
-          const select = document.createElement('select');
+          let select = document.createElement('select');
           select.setAttribute('id', 'textStyle');
           for (let font of fonts) {
-            const option = document.createElement('option');
+            let option = document.createElement('option');
             option.textContent = font[0];
             option.value = font[1];
             select.appendChild(option);
@@ -185,7 +183,7 @@ function createDOM() {
           element.appendChild(select)
           dom[type].push(select);
         } else {
-          const input = document.createElement('input');
+          let input = document.createElement('input');
           input.type = 'color';
           input.setAttribute('id', 'textColor');
           element.appendChild(input);
@@ -194,10 +192,10 @@ function createDOM() {
       }
     } else if (type == 'select') {
       // Normal select element
-      const select = document.createElement('select');
+      let select = document.createElement('select');
       select.setAttribute('id', name);
       for (let item of data) {
-        const option = document.createElement('option');
+        let option = document.createElement('option');
         option.value = item[1];
         option.dataset.l10nId = name + '_options.' + item[0];
         select.appendChild(option);
@@ -205,13 +203,13 @@ function createDOM() {
       element.appendChild(select);
       // Register event
       select.onchange = x => {
-        const value = select.options[select.selectedIndex].value;
+        let value = select.options[select.selectedIndex].value;
         cmd('set', [select.id, value]);
       };
       dom[type].push(select);
     } else if (name == 'backup') {
       // Button element
-      const a = document.createElement('a');
+      let a = document.createElement('a');
       a.setAttribute('id', name);
       a.dataset.l10nId = name;
       a.download = 'uNote-backup-' + Date.now() + '.json';
@@ -219,19 +217,19 @@ function createDOM() {
       dom[type].push(a);
     } else {
       // Input element
-      const input = document.createElement('input');
+      let input = document.createElement('input');
       input.type = type;
       input.setAttribute('id', name);
       element.appendChild(input);
       if (type == 'checkbox') {
-        const label = document.createElement('label');
+        let label = document.createElement('label');
         label.setAttribute('for', name);
         element.appendChild(label);
       }
       // Register event
       if (type == 'file') {
         input.onchange = x => {
-          const reader = new FileReader();
+          let reader = new FileReader();
           reader.onload = e => cmd('restore', e.target.result);
           reader.readAsText(input.files[0]);
         }
@@ -255,22 +253,22 @@ function createDOM() {
   // Register combo event
   let lastIndex;
   for (let item of dom.combo) {
-    const t = dom.combo;
+    let t = dom.combo;
     item.onchange = e => {
-      const s = i => t[i].options[t[i].selectedIndex].value;
+      let s = i => t[i].options[t[i].selectedIndex].value;
       let mod = s(0), mod2 = s(1), key = s(2);
       // Prevent for same key modifiers
       if (lastIndex) t[1].options[lastIndex].style.display = 'block';
       lastIndex = t[0].selectedIndex + 1;
       if (lastIndex === t[1].selectedIndex) mod2 = t[1].value = '';
       t[1].options[lastIndex].style.display = 'none';
-      const combo = [mod, mod2, key].filter(i => i.length).join('-');
+      let combo = [mod, mod2, key].filter(i => i.length).join('-');
       cmd('set', ['combo', combo]);
     };
   }
   // Register font event
   for (let item of dom.font) {
-    const t = dom.font;
+    let t = dom.font;
     item.onchange = x => {
       cmd('set', ['textSize', t[0].value]);
       cmd('set', ['textStyle', t[1].options[t[1].selectedIndex].value]);
