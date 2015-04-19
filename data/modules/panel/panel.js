@@ -17,6 +17,9 @@ const cmd = (name, data) => self.port.emit('cmd', name, data);
 // On typing
 notes.onkeyup = x => cmd('typing', notes.value);
 title.onkeyup = x => cmd('typing-title', title.value);
+// On 'middlemouse.paste'
+notes.onmouseup = title.onmouseup = e =>
+  (e.which == 2) && setTimeout(e.target.onkeyup, 500);
 // On double click
 title.ondblclick = x => cmd('state');
 // Buttons
