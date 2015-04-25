@@ -5,14 +5,16 @@ const lang = require('sdk/l10n').get;
 const sPrefs = require('sdk/simple-prefs');
 const prefs = sPrefs.prefs;
 const service = require('sdk/preferences/service');
-const { menu } = require('./menu');
-const { tabs } = require('./tabs');
-const { notes } = require('./notes');
-const { button } = require('./button');
-const { panel } = require('./panel');
-const { hotkeys } = require('./keys');
-const { manager } = require('./manager');
-const { settings } = require('./settings');
+const { menu } = require('./lib/menu');
+const { tabs } = require('./lib/tabs');
+const { notes } = require('./lib/notes');
+const { button } = require('./lib/button');
+const { panel } = require('./lib/panel');
+const { hotkeys } = require('./lib/keys');
+const { manager } = require('./lib/manager');
+const { settings } = require('./lib/settings');
+
+const syncPref = 'services.sync.prefs.sync.extensions.' + me.id + '.syncNotes';
 
 /* Button */
 
@@ -84,8 +86,7 @@ sPrefs.on('syncNotes', x => {
 
 // Toggle sync service state
 sPrefs.on('sync', x => {
-  service.set('services.sync.prefs.sync.extensions.' +
-    me.id + '.syncNotes', prefs.sync);
+  service.set(syncPref, prefs.sync);
 });
 
 /* Preferences */
@@ -114,17 +115,9 @@ sPrefs.on('openSettings', x => settings.open());
 
 /* Export */
 
-exports.main = function(opt, args) {
-  // Scenarios
-  switch (opt.loadReason) {
-    case 'install':
-      // Set sync key
-      service.set(
-        'services.sync.prefs.sync.extensions.' +
-        me.id + '.syncNotes', prefs.sync
-      );
-    break;
-  }
+exports.main = function(opts) {
+  // Set sync key
+  if (opts.loadReason == 'install') service.set(syncPref, prefs.sync);
   // Send localization data
   panel.cmd('localization', {
     noNotes: lang('noNotes'),

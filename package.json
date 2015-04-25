@@ -1,13 +1,18 @@
 {
-  "name": "unote",
   "title": "μNote",
-  "version": "0.6",
+  "name": "unote",
+  "version": "0.6.0",
   "id": "unote@kosmodrey",
-  "description": "Minimalistic notes. For every site.",
-  "author": "Kosmodrey",
-  "homepage": "https://github.com/kosmodrey/uNote",
-  "license": "VUL 0",
   "icon": "./data/icons/icon.png",
+  "description": "Minimalistic notes. For every site.",
+  "author": "Kosmodrey <kosmodrey@yandex.ru>",
+  "homepage": "https://github.com/kosmodrey/uNote",
+  "main": "index.js",
+  "engines": {
+    "firefox": ">=38.0a1",
+    "fennec": ">=38.0a1"
+  },
+  "license": "VUL 0",
   "preferences": [
     {
       "name": "openSettings",
