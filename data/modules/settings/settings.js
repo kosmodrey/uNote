@@ -33,10 +33,12 @@ const models = [
   ['font', 'font'],
   ['combo', 'combo'],
   ['panelOnCopy', 'checkbox'],
-  ['panelOnInit', 'checkbox'],
-  ['sync', 'checkbox'],
-  ['backup', 'a'],
-  ['restore', 'file']
+  ['perUrl', 'checkbox'],
+  ['preLoad', 'checkbox'],
+  // ['sync', 'checkbox'],
+  ['textRTL', 'checkbox'],
+  // ['backup', 'a'],
+  // ['restore', 'file']
 ];
 
 // Store DOM elements
@@ -48,11 +50,11 @@ const dom = {
 // Cmd command
 const cmd = (name, data) => self.port.emit('cmd', name, data);
 
-// Send startup command
-cmd('startup');
-
 // Start build DOM
 createDOM();
+
+// Send startup command
+cmd('startup');
 
 // Commands
 self.port.on('cmd', (name, data) => {

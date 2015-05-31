@@ -5,7 +5,6 @@
 html {
   display: flex;
   flex-direction: column;
-  height: 100%;
 }
 
 body {
@@ -105,7 +104,7 @@ h1 {
 #list {
   margin: 0;
   padding: 5px;
-  height: calc(100vh - 51px);
+  height: calc(100vh - 20px);
   list-style: none;
   overflow-y: auto;
   box-sizing: border-box;
@@ -136,7 +135,18 @@ h1 {
   transition: background 0.2s;
   box-shadow: 0 1px 0px rgba(0, 0, 0, 0.4);
   -moz-user-select: none;
-  cursor: default;
+  cursor: default;  
+}
+
+.item > div {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: none;
+}
+
+.item.selected div {
+  margin-right: 15px;
 }
 
 .item:last-child {
@@ -144,48 +154,28 @@ h1 {
 }
 
 .item.selected {
-  color: #fff;
-  background: rgba(0, 0, 0, 0.8);
+  color: #111;
+  background: #F2F2F2;
 }
 
-.pin, .remove {
+.remove {
   display: none;
   cursor: pointer;
 }
 
 .item.selected > .remove {
   float: right;
-  margin-top: 6px;
-  display: inline-block;
+  margin-top: -12px;
+  display: block;
   width: 10px;
   height: 10px;
   background: #F92672;
   border-radius: 50%;
 }
 
-.item.selected > .pin {
-  display: inline-block;
-  float: right;
-  margin: 6px 5px 0 0;
-  width: 10px;
-  height: 10px;
-  background: #EBEBEB;
-  border-radius: 50%;
-}
-
-.item.selected > .pin:hover {
-  background: #FCAA31;
-}
-
 .item.selected > .remove:hover {
   background: #EC1D67;
 }
-
-.item.pinned > .pin {
-  background: gold;
-}
-
-/* Footer */
 
 footer {
   color: #c0c0c0;

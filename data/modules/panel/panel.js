@@ -6,59 +6,58 @@ const
   notes = document.getElementById('notes'),
   manager = document.getElementById('button-manager'),
   settings = document.getElementById('button-settings'),
-  toggle = document.getElementById('toggle-global');
+  toggle = document.getElementById('toggle-global'),
+  bottom = document.querySelector('.bottom');
 
-// Store localization
-let loc = {};
+var loc = {};
 
-// Cmd funcion
 const cmd = (name, data) => self.port.emit('cmd', name, data);
 
-// On typing
 notes.onkeyup = x => cmd('typing', notes.value);
 title.onkeyup = x => cmd('typing-title', title.value);
-// On 'middlemouse.paste'
 notes.onmouseup = title.onmouseup = e =>
   (e.which == 2) && setTimeout(e.target.onkeyup, 500);
-// On double click
-title.ondblclick = x => cmd('state');
-// Buttons
 manager.onclick = x => cmd('button', 'manager');
 settings.onclick = x => cmd('button', 'settings');
-// Toggles
-toggle.onchange = x => cmd('toggle-global', toggle.checked);
+toggle.onchange = x => cmd('toggle', toggle.checked);
 
-// Commands
 self.port.on('cmd', (name, data) => {
-  switch (name) {
-    // Set localization data
-    case 'localization':
-      loc = data;
+  switch(name) {
+    case 'startup':
+      loc = data.loc;
     break;
-    // Set notes
-    case 'notes':
-      notes.value = data || '';
-      notes.scrollTop = 0;
-      notes.focus();
+    case 'style':
+      if (data.size)
+        title.style.fontSize = notes.style.fontSize = data.size + 'px';
+      if (data.style)
+       title.style.fontFamily = notes.style.fontFamily = data.style;
+      if (data.color)
+        title.style.color = notes.style.color = bottom.style.color = data.color;
+      if (data.rtl !== undefined) {
+        if (data.rtl) {
+          title.setAttribute('dir', 'rtl');
+          notes.setAttribute('dir', 'rtl');
+        } else {
+          title.setAttribute('dir', 'auto');
+          notes.setAttribute('dir', 'auto');
+        }
+      }
     break;
-    // Set font
-    case 'font':
-      if (data.size) notes.style.fontSize = data.size + 'px';
-      if (data.style) notes.style.fontFamily = data.style;
-      if (data.color) notes.style.color = data.color;
-    break;
-    // Update user interface
     case 'update':
-      toggle.checked = data.global;
-      if (data.host == '__null__' || toggle.checked) {
+      toggle.checked = (data.id == '__global__');
+      if (toggle.checked) {
         notes.placeholder = loc.noGlobalNotes;
         title.placeholder = loc.globalNotes;
-        title.value = data.item.title || title.placeholder;
       } else {
         notes.placeholder = loc.noNotes;
-        title.placeholder = data.host;
-        title.value = data.item.title || data.host;
+        title.placeholder = data.id;
       }
+      title.value = data.title || '';
+      notes.value = data.notes || '';
+    break;
+    case 'show':
+      // notes.scrollTop = 0;
+      notes.focus();
     break;
   }
 });

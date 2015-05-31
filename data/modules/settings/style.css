@@ -2,17 +2,12 @@
   --listPadding: 0.8em;
 }
 
-html {
-  height: 100%;
-}
-
 body {
   margin: 0 10px 10px 10px;
   color: #444;
   font-size: 1em;
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
   background: ghostwhite;
-
 }
 
 a {
@@ -192,8 +187,6 @@ input[type="file"] {
   color: rgba(0, 0, 0, 0.2);
   content: 'px';
 }
-
-/* Footer */
 
 footer {
   color: #c0c0c0;

@@ -6,7 +6,7 @@ const
   notes = document.getElementById('notes');
 
 // Store last selected item and localization
-let lastItem, loc = {};
+var lastItem, loc = {};
 
 // Cmd command
 const cmd = (name, data) => self.port.emit('cmd', name, data);
@@ -22,68 +22,55 @@ cmd('startup');
 list.onclick = evt => {
   const item = evt.target;
   if (!item) return;
-  // Item
   if (item.classList.contains('item')) {
     if (lastItem) lastItem.classList.remove('selected');
     lastItem = item;
     item.classList.add('selected');
     notes.disabled = false;
-    cmd('get', item.dataset.host);
-  // Pin button
-  } else if (item.classList.contains('pin')) {
-    const state = item.parentNode.classList.contains('pinned');
-    item.parentNode.classList.toggle('pinned');
-    cmd('setState', { host: item.parentNode.dataset.host, state: !state });
-  // Remove button
+    cmd('get', item.dataset.id);
   } else if (item.classList.contains('remove')) {
     list.removeChild(item.parentNode);
     notes.value = '';
     notes.disabled = true;
-    // Clean list
     if (list.querySelector('li') === null) list.innerHTML = '';
-    // Send remove command
-    cmd('remove', item.parentNode.dataset.host);
+    cmd('remove', item.parentNode.dataset.id);
   }
 };
 
 // Send typing text
 notes.onkeyup = x => cmd('typing', {
-  host: lastItem.dataset.host,
+  id: lastItem.dataset.id,
   notes: notes.value
 });
 
 // Commands
 self.port.on('cmd', (name, data) => {
   switch (name) {
-    // Set localization
-    case 'localization':
-      loc = data;
+    case 'startup':
+      loc = data.loc;
       list.dataset.label = loc.noNotesLabel;
       notes.placeholder = loc.noNotes;
+      notes.setAttribute('dir', data.rtl ? 'rtl' : 'auto');
     break;
-    // Set notes
     case 'get':
-      if (document.querySelector('.item[data-host="' + data.host + '"]')) {
-        notes.value = data.item.notes || '';
+      if (document.querySelector('.item[data-id="' + data.id + '"]')) {
+        notes.value = data.notes || '';
       }
     break;
-    // Set list
     case 'list':
-      for (let item in data) {
-        // Create element
+      for (let item of data) {
         const li = document.createElement('li'),
-          pin = document.createElement('span'),
+          div = document.createElement('div'),
           remove = document.createElement('span');
-        li.className = 'item' + (data[item].state ? ' pinned' : '');
-        li.dataset.host = item;
-        li.textContent = data[item].title || (item == '__null__' ? loc.globalNotes : item);
+        li.className = 'item';
+        li.dataset.id = item.id;
+        li.dataset.host = item.host;
+        div.textContent =
+          item.title || (item.id == '__global__' ? loc.globalNotes : item.id);
         remove.className = 'remove';
         remove.title = loc.removeNote;
-        pin.className = 'pin';
-        pin.title = loc.pinNote;
+        li.appendChild(div);
         li.appendChild(remove);
-        li.appendChild(pin);
-        // Append element to list
         list.appendChild(li);
       }
     break;

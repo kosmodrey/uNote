@@ -1,4 +1,4 @@
-# μNote
+# uNote
 Minimalistic notes. For every site. Firefox add-on.
 
 - Minimalistic & simple

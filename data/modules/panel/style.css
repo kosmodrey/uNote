@@ -1,18 +1,13 @@
 @font-face {
   font-family: 'Icons';
-  src: url('../../icons/icons.woff');
+  src: url('../../icons/icons.woff?v2');
   font-weight: normal;
   font-style: normal;
-}
-
-html {
-  height: 100%;
 }
 
 body {
   display: flex;
   flex-direction: column;
-  margin: 0;
   height: 100%;
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
   font-size: 10pt;
@@ -20,10 +15,9 @@ body {
 
 input {
   width: 100%;
-  color: #c0c0c0;
   font-size: 1em;
   line-height: 1.4em;
-  font-weight: bold;
+  background: inherit;
   text-align: center;
   border: 0;
 }
@@ -56,8 +50,29 @@ button::-moz-focus-inner {
   border: 0;
 }
 
-button:hover {
-  color: #a8a8a8;
+.header, .bottom {
+  display: flex;
+  padding: 5px;
+}
+
+.header {
+}
+
+.bottom {
+  font-size: 1.6em;
+  -moz-user-select: none;
+}
+
+.bottom .center {
+  width: 100%;
+  margin: 0 5px;
+  font-family: 'Icons';
+  text-align: center;
+}
+
+button:hover,
+input[type="checkbox"] + label:hover {
+  opacity: 0.6;
 }
 
 input[type="checkbox"] {
@@ -67,33 +82,15 @@ input[type="checkbox"] {
 button,
 input[type="checkbox"] + label {
   cursor: pointer;
-  color: #c0c0c0;
+  color: inherit;
+  opacity: 0.4;
   transition: all 0.2s;
 }
 
 input[type="checkbox"]:checked + label {
-  color: #3475E0;
+  opacity: 1;
 }
 
-input[type="checkbox"]:checked + label:hover {
-  color: #366CC5;
-}
-
-.header {
-  display: flex;
-  padding: 5px;
-}
-
-.bottom {
-  display: flex;
-  padding: 5px;
-  font-family: 'Icons';
-  font-size: 1.6em;
+.readonly {
   -moz-user-select: none;
-}
-
-.bottom .c {
-  width: 100%;
-  margin: 0 5px;
-  text-align: center;
 }
