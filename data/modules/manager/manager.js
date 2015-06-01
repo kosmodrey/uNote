@@ -50,7 +50,7 @@ self.port.on('cmd', (name, data) => {
       loc = data.loc;
       list.dataset.label = loc.noNotesLabel;
       notes.placeholder = loc.noNotes;
-      notes.setAttribute('dir', data.rtl ? 'rtl' : 'auto');
+      notes.dir = data.rtl ? 'rtl' : 'ltr';
     break;
     case 'get':
       if (document.querySelector('.item[data-id="' + data.id + '"]')) {

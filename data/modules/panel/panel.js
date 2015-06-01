@@ -35,11 +35,9 @@ self.port.on('cmd', (name, data) => {
         title.style.color = notes.style.color = bottom.style.color = data.color;
       if (data.rtl !== undefined) {
         if (data.rtl) {
-          title.setAttribute('dir', 'rtl');
-          notes.setAttribute('dir', 'rtl');
+          title.dir = notes.dir = 'rtl';
         } else {
-          title.setAttribute('dir', 'auto');
-          notes.setAttribute('dir', 'auto');
+          title.dir = notes.dir = 'ltr';
         }
       }
     break;
