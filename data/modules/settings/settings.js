@@ -73,16 +73,16 @@ self.port.on('cmd', (name, data) => {
         prefs['combo-key'] = combo[2];
       }
       // Backup link
-      prefs.backup = 'data:text/json;charset=utf-8,' + prefs.syncNotes;
+      // prefs.backup = 'data:text/json;charset=utf-8,' + prefs.syncNotes;
       // Set values
       for (let name in prefs) {
         const item = document.getElementById(name);
         if (!item) continue;
         const value = prefs[name];
-        if (name == 'backup') {
-          item.href = value;
-          continue;
-        }
+        // if (name == 'backup') {
+        //   item.href = value;
+        //   continue;
+        // }
         switch (item.type) {
           case 'color':
           case 'number':
@@ -95,13 +95,13 @@ self.port.on('cmd', (name, data) => {
         }
       }
     break;
-    case 'restore':
-      if (data === true) {
-        alert('Backup successfully loaded.');
-      } else {
-        alert('Error loading backup file.');
-      }
-    break;
+    // case 'restore':
+    //   if (data === true) {
+    //     alert('Backup successfully loaded.');
+    //   } else {
+    //     alert('Error loading backup file.');
+    //   }
+    // break;
   }
 });
 

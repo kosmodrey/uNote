@@ -126,7 +126,7 @@ h1 {
 }
 
 .item {
-  padding: 5px 8px;
+  padding: 3px 8px;
   margin-bottom: 5px;
   color: rgba(255, 255, 255, 0.7);
   font-size: 0.8em;
@@ -155,7 +155,7 @@ h1 {
 
 .item.selected {
   color: #111;
-  background: #F2F2F2;
+  background: #FEFFF2;
 }
 
 .remove {
@@ -165,7 +165,7 @@ h1 {
 
 .item.selected > .remove {
   float: right;
-  margin-top: -12px;
+  margin-top: -15px;
   display: block;
   width: 10px;
   height: 10px;

@@ -90,7 +90,3 @@ input[type="checkbox"] + label {
 input[type="checkbox"]:checked + label {
   opacity: 1;
 }
-
-.readonly {
-  -moz-user-select: none;
-}

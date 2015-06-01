@@ -7,7 +7,7 @@ const
   prefs = require('sdk/simple-prefs'),
   pref = prefs.prefs,
 
-  { db, notes, storage } = require('./lib/notes'),
+  { notes } = require('./lib/notes'),
   { tab } = require('./lib/tab'),
   { keys } = require('./lib/keys'),
   { button } = require('./lib/button'),
@@ -16,21 +16,9 @@ const
   { manager } = require('./lib/manager'),
   { contextMenu } = require('./lib/contextmenu');
 
-const syncPref = 'services.sync.prefs.sync.extensions.' + me.id + '.syncNotes';
-
 var
-  id = null,
+  memory = {},
   preLoad = pref.preLoad;
-
-/* Functions */
-function saveNote() {
-  if (!id) return;
-  const data = storage.get(id[0]);
-  data.timeUpdated = Date.now();
-  notes.put(data);
-  id = null;
-  console.log('<update>', data);
-}
 
 /* Button */
 
@@ -44,7 +32,7 @@ button.self.on('change', state => {
 
 panel.self.on('hide', x => {
   button.checked(false);
-  saveNote();
+  saveMemory();
 });
 
 panel.self.on('show', x => {
@@ -54,19 +42,21 @@ panel.self.on('show', x => {
 });
 
 panel.self.port.on('cmd', (name, data) => {
-  if (!id) id = tab.getId();
   switch(name) {
     case 'typing':
-      return storage.setData('.', 'notes', data);
+      setMemory();
+      return (memory.notes = data);
     case 'typing-title':
-      return storage.setData('.', 'title', data);
+      setMemory();
+      return (memory.title = data);
     case 'button':
       panel.hide();
       if (data == 'manager') manager.open();
       else if (data == 'settings') settings.open();
     break;
     case 'toggle':
-      saveNote();
+      setMemory();
+      saveMemory();
       pref.global = data;
     break;
   }
@@ -74,18 +64,8 @@ panel.self.port.on('cmd', (name, data) => {
 
 /* Tabs */
 
-(function() {
-
-  tab.self.on('activate', update);
-  tab.self.on('ready', update);
-
-  function update() {
-    const id = tab.getId();
-    if (preLoad) panel.update();
-    console.log(id);
-  }
-
-}());
+tab.self.on('activate', x => preLoad && panel.update());
+tab.self.on('ready', x => preLoad && panel.update());
 
 /* Preferences */
 
@@ -114,16 +94,23 @@ prefs.on('textStyle', x => panel.cmd('style', { style: pref.textStyle }));
 prefs.on('textColor', x => panel.cmd('style', { color: pref.textColor }));
 prefs.on('textRTL', x => panel.cmd('style', { rtl: pref.textRTL }));
 
-/* Database */
+/* Functions */
 
-db.event.on('success', x => {
-  panel.update();
-});
+function setMemory() {
+  [memory.id, memory.host, memory.url] = tab.getId();
+}
+
+function saveMemory() {
+  if (!memory.id) return;
+  if (memory.notes === undefined && memory.title == undefined) return;
+  memory.timeUpdated = Date.now();
+  notes.update(memory.id, memory);
+  memory = {};
+}
 
 /* Export */
 
 exports.main = function(opts) {
-  // if (opts.loadReason == 'install') service.set(syncPref, pref.sync);
   panel.cmd('startup', {
     loc: {
       noNotes: l('noNotes'),
@@ -138,3 +125,5 @@ exports.main = function(opts) {
     ltr: pref.textRTL
   });
 };
+
+exports.memory = memory;
