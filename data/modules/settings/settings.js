@@ -37,8 +37,8 @@ const models = [
   ['preLoad', 'checkbox'],
   // ['sync', 'checkbox'],
   ['textRTL', 'checkbox'],
-  // ['backup', 'a'],
-  // ['restore', 'file']
+  ['backup', 'a'],
+  ['restore', 'file']
 ];
 
 // Store DOM elements
@@ -72,17 +72,11 @@ self.port.on('cmd', (name, data) => {
         prefs['combo-mod1'] = combo[1];
         prefs['combo-key'] = combo[2];
       }
-      // Backup link
-      // prefs.backup = 'data:text/json;charset=utf-8,' + prefs.syncNotes;
       // Set values
       for (let name in prefs) {
         const item = document.getElementById(name);
         if (!item) continue;
         const value = prefs[name];
-        // if (name == 'backup') {
-        //   item.href = value;
-        //   continue;
-        // }
         switch (item.type) {
           case 'color':
           case 'number':
@@ -95,13 +89,19 @@ self.port.on('cmd', (name, data) => {
         }
       }
     break;
-    // case 'restore':
-    //   if (data === true) {
-    //     alert('Backup successfully loaded.');
-    //   } else {
-    //     alert('Error loading backup file.');
-    //   }
-    // break;
+    case 'backup':
+      const item = document.getElementById('backup');
+      item.href = 'data:text/json;charset=utf-8,' + data;
+    break;
+    case 'restore':
+      if (data === true) {
+        console.log('<uNote restore> OK');
+        alert('Backup successfully loaded.');
+      } else {
+        console.error('<uNote restore> ERROR', data);
+        alert('Error loading backup file.');
+      }
+    break;
   }
 });
 

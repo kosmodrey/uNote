@@ -125,5 +125,3 @@ exports.main = function(opts) {
     ltr: pref.textRTL
   });
 };
-
-exports.memory = memory;
