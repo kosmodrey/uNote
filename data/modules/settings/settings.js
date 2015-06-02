@@ -61,9 +61,9 @@ self.port.on('cmd', (name, data) => {
   switch (name) {
     case 'startup':
       // Set preferences values
-      const prefs = data.prefs;
+      let prefs = data.prefs;
       // Split combo string
-      const combo = prefs.combo.split('-');
+      let combo = prefs.combo.split('-');
       prefs['combo-mod0'] = combo[0];
       if (combo.length == 2) {
         prefs['combo-mod1'] = '';
@@ -74,9 +74,9 @@ self.port.on('cmd', (name, data) => {
       }
       // Set values
       for (let name in prefs) {
-        const item = document.getElementById(name);
+        let item = document.getElementById(name);
         if (!item) continue;
-        const value = prefs[name];
+        let value = prefs[name];
         switch (item.type) {
           case 'color':
           case 'number':
@@ -90,7 +90,7 @@ self.port.on('cmd', (name, data) => {
       }
     break;
     case 'backup':
-      const item = document.getElementById('backup');
+      let item = document.getElementById('backup');
       item.href = 'data:text/json;charset=utf-8,' + data;
     break;
     case 'restore':
@@ -108,8 +108,7 @@ self.port.on('cmd', (name, data) => {
 // Create DOM
 function createDOM() {
   for (let index of models) {
-    let [name, type, data] = index;
-    const
+    let [name, type, data] = index,
       li = document.createElement('li'),
       head = document.createElement('div'),
       title = document.createElement('div'),
