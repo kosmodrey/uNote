@@ -1,7 +1,7 @@
 {
   "title": "uNote",
   "name": "unote",
-  "version": "1.0.0",
+  "version": "0.7.0",
   "id": "unote@kosmodrey",
   "icon": "./data/icons/icon64.png",
   "description": "Minimalistic notes. For every site.",
