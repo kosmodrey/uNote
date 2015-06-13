@@ -3,7 +3,6 @@ Minimalistic notes. For every site. Firefox add-on.
 
 - Minimalistic & simple
 - Share notes between tabs (Global notes)
-- Synchronization (using Firefox Sync)
 - Backup/restore notes
 - Easy settings page
 - Notes manager
