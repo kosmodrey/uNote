@@ -3,7 +3,6 @@
   "name": "unote",
   "version": "0.7.1",
   "id": "unote@kosmodrey",
-  "icon": "./data/icons/icon64.png",
   "description": "Minimalistic notes. For every site.",
   "author": "Kosmodrey <kosmodrey@yandex.ru>",
   "homepage": "https://github.com/kosmodrey/uNote",
