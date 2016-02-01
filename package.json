@@ -120,7 +120,7 @@
       "name": "combo",
       "title": "Hotkeys",
       "type": "string",
-      "value": "accel-m",
+      "value": "accel-alt-m",
       "hidden": true
     },
     {
