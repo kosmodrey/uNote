@@ -1,0 +1,29 @@
+{
+  "appDescription": {
+    "message": "Minimalistic notes. For every site."
+  },
+  "note": {
+    "message": "Note"
+  },
+  "noteSavedTo": {
+    "message": "Saved to"
+  },
+  "textCopy": {
+    "message": "Copy to uNote"
+  },
+  "textCopyLocal": {
+    "message": "Copy to local..."
+  },
+  "textCopyGlobal": {
+    "message": "Copy to global..."
+  },
+  "noNotes": {
+    "message": "No notes for this site yet."
+  },
+  "globalNotes": {
+    "message": "Global Notes"
+  },
+  "noGlobalNotes": {
+    "message": "No global notes."
+  }
+}
